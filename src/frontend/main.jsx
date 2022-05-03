@@ -1,9 +1,18 @@
 import React from "react";
-import { render } from "react-dom";
-import "./index.css";
+import ReactDOM from "react-dom";
+import "./styles/index.css";
 import App from "./component/App";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  useQuery,
+  gql
+} from "@apollo/client";
 
-const rootElement = document.getElementById("root");
-render ( <React.StrictMode>
-  <App />
-</React.StrictMode>, rootElement);
+ReactDOM.render(
+  <React.StrictMode>
+      <App />
+  </React.StrictMode>,
+  document.getElementById("root")
+);
