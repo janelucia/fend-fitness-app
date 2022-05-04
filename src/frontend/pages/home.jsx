@@ -4,6 +4,7 @@ import H2 from '../component/font/H2';
 import H3 from '../component/font/H3';
 import ST from '../component/font/SmallText';
 import HeroImage from '../styles/images/HeroImage.png';
+import Navi from '../component/Navi';
 
 const Home = () => {
     return (
@@ -23,6 +24,7 @@ const Home = () => {
                     <ST>26 Min. · Beweglichkeit</ST>
                 </div>
             </Card>
+            <Navi />
         </div>
     )
 };
