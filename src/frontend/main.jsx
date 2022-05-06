@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./styles/global.css";
-import App from "./App";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,
   InMemoryCache,
@@ -9,10 +8,20 @@ import {
   useQuery,
   gql
 } from "@apollo/client";
+import "./styles/global.css";
+import App from "./routes/App";
+import Browse from "./routes/Browse";
+import Profile from "./routes/Profile";
 
 ReactDOM.render(
-  <React.StrictMode>
-      <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <React.StrictMode>
+      <Routes>
+        <Route path='/' element={<App />} />
+        <Route path='browse' element={<Browse />} />
+        <Route path='profile' element={<Profile />} />
+      </Routes>
+    </React.StrictMode>
+  </BrowserRouter>,
   document.getElementById("root")
 );
