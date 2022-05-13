@@ -1,19 +1,22 @@
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import Program from './Program';
 
 const Card = (props) => {
   const { className, children } = props;
+  const programModal = () => {
+    return <Program></Program>;
+  };
   return (
-    <Link to="/program">
-      <div
-        className={classNames(
-          'bg-medium text-light rounded-[30px] w-full',
-          className
-        )}
-      >
-        {children}
-      </div>
-    </Link>
+    <div
+      onClick={programModal}
+      className={classNames(
+        'bg-medium text-light rounded-[30px] w-full',
+        className
+      )}
+    >
+      {children}
+    </div>
   );
 };
 
