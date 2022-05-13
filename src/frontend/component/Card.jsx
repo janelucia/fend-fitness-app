@@ -1,8 +1,19 @@
-const Card = ({ children }) => {
+import classNames from 'classnames';
+import { Link } from 'react-router-dom';
+
+const Card = (props) => {
+  const { className, children } = props;
   return (
-    <div className="bg-medium text-light rounded-[30px] w-96 h-52">
-      {children}
-    </div>
+    <Link to="/program">
+      <div
+        className={classNames(
+          'bg-medium text-light rounded-[30px] w-full h-52',
+          className
+        )}
+      >
+        {children}
+      </div>
+    </Link>
   );
 };
 
