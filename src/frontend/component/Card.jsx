@@ -7,7 +7,7 @@ const Card = (props) => {
     <Link to="/program">
       <div
         className={classNames(
-          'bg-medium text-light rounded-[30px] w-full h-52',
+          'bg-medium text-light rounded-[30px] w-full',
           className
         )}
       >
