@@ -14,9 +14,9 @@ function App() {
       </header>
       <main className="mt-10 mx-5 mb-6">
         <img className="mx-auto" src={HeroImage} alt="Women in Yoga Position" />
-        <div className="mt-10 mb-3">
-          <H2 className="inline">Dein Workout heute</H2>
-          <ST className="inline relative left-12">Trainingsplan</ST>
+        <div className="mt-10 mb-3 flex justify-between items-end">
+          <H2>Dein Workout heute</H2>
+          <ST>Trainingsplan</ST>
         </div>
         <Card className="h-52 p-5 flex flex-col justify-end">
           <H3>Tag 2</H3>
