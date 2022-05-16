@@ -18,12 +18,10 @@ function App() {
           <H2 className="inline">Dein Workout heute</H2>
           <ST className="inline relative left-12">Trainingsplan</ST>
         </div>
-        <Card>
-          <div className="pl-7 pt-24">
-            <H3>Tag 2</H3>
-            <H2>Titel des Programms</H2>
-            <ST>26 Min. · Beweglichkeit</ST>
-          </div>
+        <Card className="h-52 p-5 flex flex-col justify-end">
+          <H3>Tag 2</H3>
+          <H2>Titel des Programms</H2>
+          <ST>26 Min. · Beweglichkeit</ST>
         </Card>
       </main>
       <footer>
