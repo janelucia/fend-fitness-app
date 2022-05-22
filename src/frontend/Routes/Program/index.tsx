@@ -1,4 +1,5 @@
-import H1 from './font/H1';
+import React from 'react';
+import H1 from '../../component/font/H1';
 
 const Program = () => {
   return (

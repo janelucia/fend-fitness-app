@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 type CircleProps = {
   className?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const Circle = ({ className, children }: CircleProps) => {

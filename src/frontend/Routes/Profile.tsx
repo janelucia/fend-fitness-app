@@ -1,3 +1,4 @@
+import React from 'react';
 import Card from '../component/Card';
 import Circle from '../component/Circle';
 import Navi from '../component/Navi';
