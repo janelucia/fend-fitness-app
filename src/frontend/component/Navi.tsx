@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Home } from '../styles/images/navi-svg/home.svg';
 import { ReactComponent as Dumbbell } from '../styles/images/navi-svg/dumbbell.svg';

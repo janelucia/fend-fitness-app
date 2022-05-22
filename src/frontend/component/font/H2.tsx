@@ -1,7 +1,12 @@
+import * as React from 'react';
 import classNames from 'classnames';
 
-const H2 = (props) => {
-  const { className, children } = props;
+type H2Props = {
+  className?: string;
+  children: React.ReactNode;
+};
+
+const H2 = ({ className, children }: H2Props) => {
   return (
     <h2
       className={classNames(

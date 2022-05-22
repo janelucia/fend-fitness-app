@@ -1,7 +1,12 @@
+import React from 'react';
 import classNames from 'classnames';
 
-const ST = (props) => {
-  const { className, children } = props;
+type STProps = {
+  className?: string;
+  children: React.ReactNode;
+};
+
+const ST = ({ className, children }: STProps) => {
   return (
     <p
       className={classNames(

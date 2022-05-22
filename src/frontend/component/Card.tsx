@@ -1,12 +1,18 @@
+import React from 'react';
 import classNames from 'classnames';
 import { useState } from 'react';
 import Program from './Program';
 
-const Card = (props) => {
-  const { className, children } = props;
-  const programModal = () => {
-    return <Program></Program>;
-  };
+type CardProps = {
+  className?: string;
+  children: React.ReactNode;
+};
+
+const programModal = () => {
+  return <Program></Program>;
+};
+
+const Card = ({ className, children }: CardProps) => {
   return (
     <div
       onClick={programModal}

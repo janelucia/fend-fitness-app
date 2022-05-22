@@ -1,3 +1,4 @@
+import * as React from 'react';
 import Card from '../component/Card';
 import H1 from '../component/font/H1';
 import H2 from '../component/font/H2';

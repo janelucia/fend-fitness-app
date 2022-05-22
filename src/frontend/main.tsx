@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,
@@ -13,7 +13,11 @@ import App from './routes/App';
 import Browse from './routes/Browse';
 import Profile from './routes/Profile';
 
-ReactDOM.render(
+const container = document.getElementById('root');
+
+const root = createRoot(container!);
+
+root.render(
   <BrowserRouter>
     <React.StrictMode>
       <Routes>
@@ -22,6 +26,5 @@ ReactDOM.render(
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </React.StrictMode>
-  </BrowserRouter>,
-  document.getElementById('root')
+  </BrowserRouter>
 );
