@@ -23,9 +23,9 @@ root.render(
       <ApolloProvider client={client}>
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="/browse" element={<Browse />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/program" element={<Program />} />
+          <Route path="browse" element={<Browse />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="browse/program/:id" element={<Program />} />
         </Routes>
       </ApolloProvider>
     </React.StrictMode>

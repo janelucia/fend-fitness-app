@@ -4,21 +4,22 @@ import { Link } from 'react-router-dom';
 
 type CardProps = {
   className?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
-const Card = ({ className, children }: CardProps) => {
+const Card = (
+  { className, children }: CardProps,
+  ...enhancedProgramObject: { id: number; name: string; gradient: string }[]
+) => {
   return (
-    <Link to="/program">
-      <div
-        className={classNames(
-          'bg-medium text-light rounded-[30px] w-full',
-          className
-        )}
-      >
-        {children}
-      </div>
-    </Link>
+    <div
+      className={classNames(
+        'bg-medium text-light rounded-[30px] w-full',
+        className
+      )}
+    >
+      {children}
+    </div>
   );
 };
 

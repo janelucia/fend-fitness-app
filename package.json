@@ -11,7 +11,8 @@
     "@apollo/client": "^3.6.1",
     "@fontsource/poppins": "^4.5.8",
     "classnames": "^2.3.1",
-    "graphql": "^16.4.0",
+    "graphql": "^16.5.0",
+    "graphql-modules": "^2.0.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0"
