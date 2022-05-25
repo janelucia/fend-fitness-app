@@ -11,8 +11,8 @@ type ProgramProps = {};
 const Program = () => {
   const { id } = useParams();
   const PROGRAM_QUERY = gql`
-    query GetProgram {
-      program(where: {id: "${id}"}) {
+    query GetProgram($id: ID!) {
+      program(where: {id: $id}) {
         description
         difficulty
         focus
@@ -29,7 +29,7 @@ const Program = () => {
       }
     }
   `;
-  const { loading, error, data } = useQuery(PROGRAM_QUERY);
+  const { loading, error, data } = useQuery(PROGRAM_QUERY, {variables: {id}});
   if (loading) return <p className="text-light text-center">loading ...</p>;
   if (error) return <p className="text-light text-center">error :/ </p>;
   const backgroundImage = {
