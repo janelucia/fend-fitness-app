@@ -45,7 +45,7 @@ const Program = () => {
   };
   const workoutOverview = data.program.workouts.map((workout) => {
     return (
-      <Card className="">
+      <Card key={workout.id}>
         <H3>{workout.name}</H3>
         <ST>
           {workout.duration} · {workout.category}
