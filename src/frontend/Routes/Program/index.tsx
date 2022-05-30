@@ -39,8 +39,8 @@ const Program = () => {
   }
   return (
     <>
-      <header className='h-[514px]'>
-        <section className="flex flex-col justify-end items-center h-full px-5 text-center" style={backgroundImage}>
+      <header>
+        <section className="flex flex-col justify-end items-center px-5 text-center" style={backgroundImage}>
           <H1>{data.program.name}</H1>
           <div className="flex justify-around w-full items-end pb-5 h-1/2">
             <div className='flex flex-col items-center gap-y-2'>
