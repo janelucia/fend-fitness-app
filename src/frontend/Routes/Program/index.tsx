@@ -1,12 +1,14 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
+import { ReactComponent as Close } from '../../styles/images/x.svg';
 import H1 from '../../component/font/H1';
 import H3 from '../../component/font/H3';
 import P from '../../component/font/P';
 import ST from '../../component/font/SmallText';
 import Circle from '../../component/Circle';
 import Card from '../../component/Card';
+import Button from '../../component/Button';
 
 type ProgramProps = {};
 
@@ -45,11 +47,14 @@ const Program = () => {
   };
   const workoutOverview = data.program.workouts.map((workout) => {
     return (
-      <Card key={workout.id}>
-        <H3>{workout.name}</H3>
-        <ST>
-          {workout.duration} · {workout.category}
-        </ST>
+      <Card key={workout.id} className="flex h-">
+        <div className="w-1/4"></div>
+        <div className="flex flex-col gap-y-4 py-2">
+          <H3>{workout.name}</H3>
+          <ST>
+            {workout.duration} · {workout.category}
+          </ST>
+        </div>
       </Card>
     );
   });
@@ -60,6 +65,9 @@ const Program = () => {
           className="flex flex-col justify-end items-center px-5 text-center"
           style={backgroundImage}
         >
+          <Link type="button" to="/browse" className="absolute top-6 right-6">
+            <Close />
+          </Link>
           <H1>{data.program.name}</H1>
           <div className="flex justify-around w-full items-end pb-5 h-1/2">
             <div className="flex flex-col items-center gap-y-2">
@@ -77,7 +85,7 @@ const Program = () => {
           </div>
         </section>
       </header>
-      <main>
+      <main className="relative overflow-auto">
         <section className="px-5 py-5 bg-medium">
           <P>{data.program.description}</P>
         </section>
@@ -89,7 +97,10 @@ const Program = () => {
             <H3>{data.program.duration} Weeks</H3>
             <ST>Alle anzeigen</ST>
           </div>
-          <div className=" flex flex-col gap-y-2">{workoutOverview}</div>
+          <div className="flex flex-col gap-y-2">{workoutOverview}</div>
+        </section>
+        <section className="fixed bottom-10 right-1/2 transform translate-x-1/2">
+          <Button>jetzt starten</Button>
         </section>
       </main>
     </>
