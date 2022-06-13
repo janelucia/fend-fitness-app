@@ -23,15 +23,19 @@ type ProgramProps = {
       url: string;
     };
     name: string;
-    weeks: {
-      id: ID;
-      title: string;
-      workouts: {
-        id: ID;
-        name: string;
-      };
-    };
+    weeks: WeekProps;
   };
+};
+
+type WeekProps = {
+  id: ID;
+  title: string;
+  workouts: WorkoutProps[];
+};
+
+type WorkoutProps = {
+  id: ID;
+  name: string;
 };
 
 const Program = () => {
@@ -68,11 +72,7 @@ const Program = () => {
     height: '70vh',
     backgroundSize: 'cover',
   };
-  const extractWorkouts = (week: {
-    id: ID;
-    title: string;
-    workouts: { id: ID; name: string }[];
-  }): ReactNode =>
+  const extractWorkouts = (week: WeekProps): ReactNode =>
     week.workouts.map((workout) => (
       <li className="flex flex-col gap-y-4 py-2">
         <P>{workout.name}</P>
@@ -84,6 +84,7 @@ const Program = () => {
       gradient: gradientArray[i % gradientArray.length],
     }))
     .map((week) => {
+      let showWorkouts = true;
       return (
         <li>
           <Card key={week.id} className="flex gap-x-3">
