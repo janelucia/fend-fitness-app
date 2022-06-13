@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
+import { Menu } from '@headlessui/react';
 import { ReactComponent as Close } from '../../styles/images/x.svg';
 import H1 from '../../component/font/H1';
 import H3 from '../../component/font/H3';
@@ -84,10 +85,14 @@ const Program = () => {
         <div className="w-1/4"></div>
         <div className="flex flex-col gap-y-4 py-2">
           <H3>{week.title}</H3>
-          <button>
-            <ST>Workouts anzeigen</ST>
-          </button>
-          <div>{extractWorkouts(week)}</div>
+          <Menu>
+            <Menu.Button>
+              <ST>Workouts anzeigen</ST>
+            </Menu.Button>
+            <Menu.Items>
+              <div>{extractWorkouts(week)}</div>
+            </Menu.Items>
+          </Menu>
         </div>
       </Card>
     );
