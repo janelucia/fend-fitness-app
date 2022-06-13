@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { ReactComponent as Close } from '../../styles/images/x.svg';
@@ -9,8 +9,28 @@ import ST from '../../component/font/SmallText';
 import Circle from '../../component/Circle';
 import Card from '../../component/Card';
 import Button from '../../component/Button';
+import { ID } from 'graphql-modules/shared/types';
 
-type ProgramProps = {};
+type ProgramProps = {
+  program: {
+    id: ID;
+    description: string;
+    difficulty: string;
+    focus: string;
+    image: {
+      url: string;
+    };
+    name: string;
+    weeks: {
+      id: ID;
+      title: string;
+      workouts: {
+        id: ID;
+        name: string;
+      };
+    };
+  };
+};
 
 const Program = () => {
   const { id } = useParams();
@@ -20,17 +40,18 @@ const Program = () => {
         description
         difficulty
         focus
-        duration
         id
         image {
           url
         }
         name
-        workouts {
+        weeks {
           id
-          name
-          duration
-          category
+          title
+          workouts {
+            id
+            name
+          }
         }
       }
     }
@@ -45,15 +66,28 @@ const Program = () => {
     height: '70vh',
     backgroundSize: 'cover',
   };
-  const workoutOverview = data.program.workouts.map((workout) => {
-    return (
-      <Card key={workout.id} className="flex h-">
-        <div className="w-1/4"></div>
+  const extractWorkouts = (week: {
+    id: ID;
+    title: string;
+    workouts: { id: ID; name: string }[];
+  }): ReactNode =>
+    week.workouts.map((workout) => (
+      <Card key={workout.id}>
         <div className="flex flex-col gap-y-4 py-2">
           <H3>{workout.name}</H3>
-          <ST>
-            {workout.duration} · {workout.category}
-          </ST>
+        </div>
+      </Card>
+    ));
+  const weekOverview = data.program.weeks.map((week) => {
+    return (
+      <Card key={week.id} className="flex h-">
+        <div className="w-1/4"></div>
+        <div className="flex flex-col gap-y-4 py-2">
+          <H3>{week.title}</H3>
+          <button>
+            <ST>Workouts anzeigen</ST>
+          </button>
+          <div>{extractWorkouts(week)}</div>
         </div>
       </Card>
     );
@@ -94,10 +128,9 @@ const Program = () => {
         </section>
         <section className="px-5 py-5">
           <div className="flex justify-between items-center">
-            <H3>{data.program.duration} Weeks</H3>
-            <ST>Alle anzeigen</ST>
+            <H3>{data.program.weeks.length} Weeks</H3>
           </div>
-          <div className="flex flex-col gap-y-2">{workoutOverview}</div>
+          <div className="flex flex-col gap-y-2">{weekOverview}</div>
         </section>
         <section className="fixed bottom-10 right-1/2 transform translate-x-1/2">
           <Button>jetzt starten</Button>
