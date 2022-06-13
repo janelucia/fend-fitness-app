@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { Menu } from '@headlessui/react';
+import gradientArray from '../../styles/gradientArray';
 import { ReactComponent as Close } from '../../styles/images/x.svg';
 import H1 from '../../component/font/H1';
 import H3 from '../../component/font/H3';
@@ -73,30 +74,38 @@ const Program = () => {
     workouts: { id: ID; name: string }[];
   }): ReactNode =>
     week.workouts.map((workout) => (
-      <Card key={workout.id}>
-        <div className="flex flex-col gap-y-4 py-2">
-          <H3>{workout.name}</H3>
-        </div>
-      </Card>
+      <li className="flex flex-col gap-y-4 py-2">
+        <P>{workout.name}</P>
+      </li>
     ));
-  const weekOverview = data.program.weeks.map((week) => {
-    return (
-      <Card key={week.id} className="flex h-">
-        <div className="w-1/4"></div>
-        <div className="flex flex-col gap-y-4 py-2">
-          <H3>{week.title}</H3>
-          <Menu>
-            <Menu.Button>
-              <ST>Workouts anzeigen</ST>
-            </Menu.Button>
-            <Menu.Items>
-              <div>{extractWorkouts(week)}</div>
-            </Menu.Items>
-          </Menu>
-        </div>
-      </Card>
-    );
-  });
+  const weekOverview = data.program.weeks
+    .map((week, i) => ({
+      ...week,
+      gradient: gradientArray[i % gradientArray.length],
+    }))
+    .map((week) => {
+      return (
+        <li>
+          <Card key={week.id} className="flex gap-x-3">
+            <div
+              className={` w-1/4 ${week.gradient} rounded-tl-[30px] rounded-bl-[30px]`}
+            ></div>
+            <div className="flex flex-col gap-y-4 py-2">
+              <H3>{week.title}</H3>
+              <Menu>
+                <Menu.Button>
+                  <ST className="text-left">Workouts anzeigen</ST>
+                </Menu.Button>
+                <Menu.Items>
+                  <hr />
+                  <ul>{extractWorkouts(week)}</ul>
+                </Menu.Items>
+              </Menu>
+            </div>
+          </Card>
+        </li>
+      );
+    });
   return (
     <>
       <header>
@@ -135,7 +144,7 @@ const Program = () => {
           <div className="flex justify-between items-center">
             <H3>{data.program.weeks.length} Weeks</H3>
           </div>
-          <div className="flex flex-col gap-y-2">{weekOverview}</div>
+          <ul className="flex flex-col gap-y-2">{weekOverview}</ul>
         </section>
         <section className="fixed bottom-10 right-1/2 transform translate-x-1/2">
           <Button>jetzt starten</Button>

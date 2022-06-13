@@ -2,6 +2,7 @@ import React from 'react';
 import Navi from '../component/Navi';
 import H2 from '../component/font/H2';
 import Card from '../component/Card';
+import gradientArray from '../styles/gradientArray';
 import { gql, useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 
@@ -19,12 +20,6 @@ const PROGRAMS_QUERY = gql`
     }
   }
 `;
-
-const gradientArray = [
-  'bg-gradient-to-br from-gradient1A to-gradient1B',
-  'bg-gradient-to-br from-gradient2A to-gradient2B',
-  'bg-gradient-to-br from-gradient3A via-gradient3B to-gradient3C',
-];
 
 const ProgramQuery = () => {
   const { loading, error, data } = useQuery(PROGRAMS_QUERY);
