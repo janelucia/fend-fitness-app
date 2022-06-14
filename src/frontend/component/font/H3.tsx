@@ -1,12 +1,21 @@
 import React from 'react';
+import classNames from 'classnames';
 
 type H3Props = {
   children: React.ReactNode;
+  className?: string;
 };
 
-const H3 = ({ children }: H3Props) => {
+const H3 = ({ children, className }: H3Props) => {
   return (
-    <h3 className="font-poppins font-bold text-lg text-light">{children}</h3>
+    <h3
+      className={classNames(
+        'font-poppins font-bold text-lg text-light',
+        className
+      )}
+    >
+      {children}
+    </h3>
   );
 };
 

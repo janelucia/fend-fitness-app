@@ -1,9 +1,11 @@
 import React, { ReactNode } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
-import { Menu } from '@headlessui/react';
+import { Menu, Transition } from '@headlessui/react';
 import gradientArray from '../../styles/gradientArray';
 import { ReactComponent as Close } from '../../styles/images/x.svg';
+import { ReactComponent as ExpandLess } from '../../styles/images/expandLess.svg';
+import { ReactComponent as ExpandMore } from '../../styles/images/expandMore.svg';
 import H1 from '../../component/font/H1';
 import H3 from '../../component/font/H3';
 import P from '../../component/font/P';
@@ -36,6 +38,8 @@ type WeekProps = {
 type WorkoutProps = {
   id: ID;
   name: string;
+  duration: number;
+  category: string;
 };
 
 const Program = () => {
@@ -57,6 +61,8 @@ const Program = () => {
           workouts {
             id
             name
+            duration
+            category
           }
         }
       }
@@ -74,8 +80,8 @@ const Program = () => {
   };
   const extractWorkouts = (week: WeekProps): ReactNode =>
     week.workouts.map((workout) => (
-      <li className="flex flex-col gap-y-4 py-2">
-        <P>{workout.name}</P>
+      <li className="flex items-baseline gap-x-2">
+        <P>{workout.name}</P>·<ST>{workout.duration} min</ST>
       </li>
     ));
   const weekOverview = data.program.weeks
@@ -84,23 +90,30 @@ const Program = () => {
       gradient: gradientArray[i % gradientArray.length],
     }))
     .map((week) => {
-      let showWorkouts = true;
       return (
         <li>
           <Card key={week.id} className="flex gap-x-3">
             <div
               className={` w-1/4 ${week.gradient} rounded-tl-[30px] rounded-bl-[30px]`}
             ></div>
-            <div className="flex flex-col gap-y-4 py-2">
-              <H3>{week.title}</H3>
+            <div className="flex flex-col py-2 gap-y-2">
               <Menu>
-                <Menu.Button>
-                  <ST className="text-left">Workouts anzeigen</ST>
-                </Menu.Button>
-                <Menu.Items>
-                  <hr />
-                  <ul>{extractWorkouts(week)}</ul>
-                </Menu.Items>
+                {({ open }) => (
+                  <>
+                    <Menu.Button className="text-left w-full">
+                      <div className="flex items-center gap-x-1">
+                        <H3>{week.title}</H3>
+                        {open ? <ExpandLess /> : <ExpandMore />}
+                      </div>
+                      <ST>{week.workouts.length} Workouts</ST>
+                    </Menu.Button>
+                    <Menu.Items>
+                      <ul className="flex flex-col gap-y-3">
+                        {extractWorkouts(week)}
+                      </ul>
+                    </Menu.Items>
+                  </>
+                )}
               </Menu>
             </div>
           </Card>

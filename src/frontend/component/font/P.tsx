@@ -1,12 +1,21 @@
 import React from 'react';
+import classNames from 'classnames';
 
 type PProps = {
+  className?: string;
   children: React.ReactNode;
 };
 
-const P = ({ children }: PProps) => {
+const P = ({ children, className }: PProps) => {
   return (
-    <p className="font-poppins font-normal text-base text-light">{children}</p>
+    <p
+      className={classNames(
+        'font-poppins font-normal text-base text-light',
+        className
+      )}
+    >
+      {children}
+    </p>
   );
 };
 
