@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { Menu, Transition } from '@headlessui/react';
@@ -14,6 +14,7 @@ import Circle from '../../component/Circle';
 import Card from '../../component/Card';
 import Button from '../../component/Button';
 import { ID } from 'graphql-modules/shared/types';
+import ProgramModal from '../../component/ProgramModal';
 
 type ProgramProps = {
   program: {
@@ -68,6 +69,12 @@ const Program = () => {
       }
     }
   `;
+
+  let [isOpen, setIsOpen] = useState(false);
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  };
+
   const { loading, error, data } = useQuery(PROGRAM_QUERY, {
     variables: { id },
   });
@@ -78,9 +85,10 @@ const Program = () => {
     height: '70vh',
     backgroundSize: 'cover',
   };
+
   const extractWorkouts = (week: WeekProps): ReactNode =>
     week.workouts.map((workout) => (
-      <li className="flex items-baseline gap-x-2">
+      <li key={workout.id} className="flex items-baseline gap-x-2">
         <P>{workout.name}</P>·<ST>{workout.duration} min</ST>
       </li>
     ));
@@ -161,7 +169,18 @@ const Program = () => {
           <ul className="flex flex-col gap-y-2">{weekOverview}</ul>
         </section>
         <section className="fixed bottom-10 right-1/2 transform translate-x-1/2">
-          <Button>jetzt starten</Button>
+          {!isOpen ? (
+            <Button onClick={toggleModal}>jetzt starten</Button>
+          ) : (
+            <ProgramModal
+              handler={toggleModal}
+              isOpen={isOpen}
+              setIsOpen={() => {
+                setIsOpen(false);
+              }}
+              title="working title"
+            />
+          )}
         </section>
       </main>
     </>
