@@ -1,7 +1,7 @@
 import React from 'react';
-import Navi from '../component/Navi';
-import H2 from '../component/font/H2';
-import Card from '../component/Card';
+import Navi from '../Component/Navi';
+import H2 from '../Component/font/H2';
+import Card from '../Component/Card';
 import gradientArray from '../styles/gradientArray';
 import { gql, useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';

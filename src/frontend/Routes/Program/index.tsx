@@ -6,15 +6,15 @@ import gradientArray from '../../styles/gradientArray';
 import { ReactComponent as Close } from '../../styles/images/x.svg';
 import { ReactComponent as ExpandLess } from '../../styles/images/expandLess.svg';
 import { ReactComponent as ExpandMore } from '../../styles/images/expandMore.svg';
-import H1 from '../../component/font/H1';
-import H3 from '../../component/font/H3';
-import P from '../../component/font/P';
-import ST from '../../component/font/SmallText';
-import Circle from '../../component/Circle';
-import Card from '../../component/Card';
-import Button from '../../component/Button';
+import H1 from '../../Component/font/H1';
+import H3 from '../../Component/font/H3';
+import P from '../../Component/font/P';
+import ST from '../../Component/font/SmallText';
+import Circle from '../../Component/Circle';
+import Card from '../../Component/Card';
+import Button from '../../Component/Button';
 import { ID } from 'graphql-modules/shared/types';
-import ProgramModal from '../../component/ProgramModal';
+import ProgramModal from '../../Component/ProgramModal';
 
 type ProgramProps = {
   program: {

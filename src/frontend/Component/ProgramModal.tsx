@@ -22,7 +22,7 @@ const ProgramModal = ({ handler, isOpen, setIsOpen, title }) => {
             <H1>Tag 1</H1>
             <ST>26 Min. · Kraft und Koordination</ST>
           </div>
-          <Button className="mb-10">los!</Button>
+          <Button className="mb-10 text-dark">los!</Button>
         </Dialog.Panel>
       </Dialog>
     </>
