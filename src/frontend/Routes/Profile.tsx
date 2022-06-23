@@ -17,7 +17,7 @@ const Profile = () => {
       <main className="m-5">
         <section className="flex flex-col justify-center items-center gap-y-3 p-8">
           <Circle className="w-32 h-32">
-            <img src={user.image.url} alt="" />
+            <img src={user.image?.url} alt="" />
           </Circle>
           <P>Profil bearbeiten</P>
         </section>

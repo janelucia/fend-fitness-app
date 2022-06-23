@@ -7,12 +7,14 @@ import H3 from '../Component/font/H3';
 import ST from '../Component/font/SmallText';
 import HeroImage from '../styles/images/HeroImage.png';
 import Navi from '../Component/Navi';
+import User from '../Queries/User';
 
 function App() {
+  const user = User();
   return (
     <>
       <header className="mt-10 mx-5 mb-6">
-        <H1>Hi Jane!</H1>
+        <H1>Hi {user.name}</H1>
       </header>
       <main className="mt-10 mx-5 mb-6">
         <img className="mx-auto" src={HeroImage} alt="Women in Yoga Position" />

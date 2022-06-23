@@ -64,6 +64,22 @@ const Program = () => {
             name
             duration
             category
+            exercises {
+              ... on ExerciseWithDuration {
+                id
+                exercise {
+                  name
+                }
+                duration
+              }
+              ... on ExerciseWithReps {
+                id
+                exercise {
+                  name
+                }
+                reps
+              }
+            }
           }
         }
       }
@@ -85,6 +101,8 @@ const Program = () => {
     height: '70vh',
     backgroundSize: 'cover',
   };
+
+  const progressWorkout = data.program.weeks[0].workouts[0];
 
   const extractWorkouts = (week: WeekProps): ReactNode =>
     week.workouts.map((workout) => (
@@ -173,12 +191,16 @@ const Program = () => {
             <Button onClick={toggleModal}>jetzt starten</Button>
           ) : (
             <ProgramModal
+              workout={progressWorkout}
               handler={toggleModal}
               isOpen={isOpen}
               setIsOpen={() => {
                 setIsOpen(false);
               }}
-              title="working title"
+              title={data.program?.name}
+              subtitle={progressWorkout.name}
+              week={data.program.weeks[0].title}
+              information={`${progressWorkout.duration} Minutes · ${progressWorkout.category}`}
             />
           )}
         </section>

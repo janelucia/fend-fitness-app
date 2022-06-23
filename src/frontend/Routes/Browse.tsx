@@ -3,7 +3,8 @@ import Navi from '../Component/Navi';
 import H2 from '../Component/font/H2';
 import Card from '../Component/Card';
 import gradientArray from '../styles/gradientArray';
-import { gql, useQuery } from '@apollo/client';
+import PROGRAMS_QUERY from '../Queries/Programs';
+import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 
 type Programs = {
@@ -11,15 +12,6 @@ type Programs = {
   name: string;
   gradient?: string;
 };
-
-const PROGRAMS_QUERY = gql`
-  query GetPrograms {
-    programs {
-      id
-      name
-    }
-  }
-`;
 
 const ProgramQuery = () => {
   const { loading, error, data } = useQuery(PROGRAMS_QUERY);
