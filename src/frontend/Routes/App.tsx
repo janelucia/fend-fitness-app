@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { gql, useQuery } from '@apollo/client';
-import Card from '../component/Card';
-import H1 from '../component/font/H1';
-import H2 from '../component/font/H2';
-import H3 from '../component/font/H3';
-import ST from '../component/font/SmallText';
+import Card from '../Component/Card';
+import H1 from '../Component/font/H1';
+import H2 from '../Component/font/H2';
+import H3 from '../Component/font/H3';
+import ST from '../Component/font/SmallText';
 import HeroImage from '../styles/images/HeroImage.png';
-import Navi from '../component/Navi';
+import Navi from '../Component/Navi';
 
 function App() {
   return (

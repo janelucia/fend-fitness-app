@@ -7,10 +7,7 @@ type CardProps = {
   children?: React.ReactNode;
 };
 
-const Card = (
-  { className, children }: CardProps,
-  ...enhancedProgramObject: { id: number; name: string; gradient: string }[]
-) => {
+const Card = ({ className, children }: CardProps) => {
   return (
     <div
       className={classNames(
