@@ -3,9 +3,9 @@ import { Link, useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { Menu, Transition } from '@headlessui/react';
 import gradientArray from '../../styles/gradientArray';
-import { ReactComponent as Close } from '../../styles/images/x.svg';
-import { ReactComponent as ExpandLess } from '../../styles/images/expandLess.svg';
-import { ReactComponent as ExpandMore } from '../../styles/images/expandMore.svg';
+import { ReactComponent as Close } from '../../styles/images/svg/x.svg';
+import { ReactComponent as ExpandLess } from '../../styles/images/svg/expandLess.svg';
+import { ReactComponent as ExpandMore } from '../../styles/images/svg/expandMore.svg';
 import H1 from '../../Component/font/H1';
 import H3 from '../../Component/font/H3';
 import P from '../../Component/font/P';
@@ -117,8 +117,8 @@ const Program = () => {
     }))
     .map((week) => {
       return (
-        <li>
-          <Card key={week.id} className="flex gap-x-3">
+        <li key={week.id}>
+          <Card className="flex gap-x-3">
             <div
               className={` w-1/4 ${week.gradient} rounded-tl-[30px] rounded-bl-[30px]`}
             ></div>
