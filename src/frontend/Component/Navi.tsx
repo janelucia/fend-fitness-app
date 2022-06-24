@@ -1,6 +1,6 @@
-import { ReactComponent as Home } from '../styles/images/navi-svg/home.svg';
-import { ReactComponent as Dumbbell } from '../styles/images/navi-svg/dumbbell.svg';
-import { ReactComponent as Profile } from '../styles/images/navi-svg/profil.svg';
+import { ReactComponent as Home } from '../styles/images/svg/navi-svg/home.svg';
+import { ReactComponent as Dumbbell } from '../styles/images/svg/navi-svg/dumbbell.svg';
+import { ReactComponent as Profile } from '../styles/images/svg/navi-svg/profil.svg';
 import NavMenu from './NavMenu';
 
 const Navi = () => {
