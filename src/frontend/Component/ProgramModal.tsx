@@ -1,5 +1,5 @@
 import { Dialog } from '@headlessui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ReactComponent as ArrowBack } from '../styles/images/svg/arrowBack.svg';
 import Button from './Button';
 import H1 from './font/H1';
@@ -13,7 +13,7 @@ const MainModal = ({
   week,
   subtitle,
   information,
-  toggleNextModal,
+  setExerciseModal,
 }) => (
   <Dialog.Panel className="text-light text-center relative flex flex-col items-center justify-center h-full">
     <Dialog.Title className="absolute top-1 mx-auto">{title}</Dialog.Title>
@@ -26,13 +26,18 @@ const MainModal = ({
       <ST>{information}</ST>
     </div>
     <Button
-      onClick={toggleNextModal}
+      onClick={setExerciseModal}
       className="absolute bottom-10 text-dark px-3"
     >
       los!
     </Button>
   </Dialog.Panel>
 );
+
+enum ModalType {
+  MainModal,
+  ExerciseModal,
+}
 
 const ProgramModal = ({
   handler,
@@ -44,9 +49,24 @@ const ProgramModal = ({
   information,
   workout,
 }) => {
-  const [currentModal, openNextModal] = useState(false);
-  const toggleNextModal = () => {
-    openNextModal(!currentModal);
+  const [modal, setModal] = useState(ModalType.MainModal);
+
+  let renderModal = (modalType: ModalType) => {
+    switch (modalType) {
+      case ModalType.ExerciseModal:
+        return <ExerciseModal handler={handler} workout={workout} />;
+      case ModalType.MainModal:
+        return (
+          <MainModal
+            handler={handler}
+            title={title}
+            week={week}
+            subtitle={subtitle}
+            information={information}
+            setExerciseModal={() => setModal(ModalType.ExerciseModal)}
+          />
+        );
+    }
   };
 
   return (
@@ -56,18 +76,7 @@ const ProgramModal = ({
         onClose={setIsOpen}
         className="absolute z-10 bg-dark left-0 top-0 h-full min-w-full p-2"
       >
-        {currentModal === true ? (
-          <ExerciseModal handler={handler} workout={workout} />
-        ) : (
-          <MainModal
-            handler={handler}
-            title={title}
-            week={week}
-            subtitle={subtitle}
-            information={information}
-            toggleNextModal={toggleNextModal}
-          />
-        )}
+        {renderModal(modal)}
       </Dialog>
     </>
   );

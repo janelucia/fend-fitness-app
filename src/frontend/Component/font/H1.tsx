@@ -1,12 +1,21 @@
 import React from 'react';
+import classNames from 'classnames';
 
 type Props = {
   children: React.ReactNode;
+  className: string;
 };
 
-const H1: React.FunctionComponent<Props> = ({ children }) => {
+const H1: React.FunctionComponent<Props> = ({ children, className }) => {
   return (
-    <h1 className="font-poppins font-bold text-4xl text-light">{children}</h1>
+    <h1
+      className={classNames(
+        'font-poppins font-bold text-4xl text-light',
+        className
+      )}
+    >
+      {children}
+    </h1>
   );
 };
 

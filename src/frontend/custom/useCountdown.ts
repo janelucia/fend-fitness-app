@@ -13,4 +13,3 @@ const linearEase = (
   const currentTime = time / duration;
   return start + goal * time;
 };
-
