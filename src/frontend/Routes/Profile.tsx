@@ -6,6 +6,7 @@ import H2 from '../Component/font/H2';
 import P from '../Component/font/P';
 import ST from '../Component/font/SmallText';
 import User from '../Queries/User';
+import { CircularProgress } from '../Component/CircularProgress';
 
 const Profile = () => {
   const user = User();
@@ -24,10 +25,19 @@ const Profile = () => {
         <section className="flex flex-col gap-y-2">
           <P>Aktueller Trainingsplan</P>
           <Card className="flex flex-row items-center gap-x-3 px-6 py-8">
-            <Circle className="p-4 border-solid border-dark border-4 ">
-              40%
-            </Circle>
-            <div className="">
+            <div className="relative">
+              <CircularProgress
+                size={62}
+                strokeWidth={4}
+                showProgress={40}
+                initialSeconds={100}
+                className="text-medium"
+              />
+              <ST className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                40 %
+              </ST>
+            </div>
+            <div>
               <P>Titel des Programms</P>
               <ST>1 von 8 geschafft</ST>
             </div>
