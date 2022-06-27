@@ -1,5 +1,5 @@
 import { Dialog } from '@headlessui/react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ReactComponent as Close } from '../styles/images/svg/x.svg';
 import { ReactComponent as ArrowLeft } from '../styles/images/svg/arrowLeft.svg';
 import { ReactComponent as ArrowRight } from '../styles/images/svg/arrowRight.svg';
@@ -7,11 +7,11 @@ import { CircularProgress } from './CircularProgress';
 import H1 from './font/H1';
 import H2 from './font/H2';
 
-export const ExerciseModal = ({ handler, workout }) => {
-  const currentWorkout = workout;
+export const ExercisePanel = ({ handler, exercise }) => {
+  const currentExercise = exercise;
 
   let timer;
-  const [seconds, setSeconds] = useState(currentWorkout.exercises[0].duration);
+  const [seconds, setSeconds] = useState(currentExercise.duration);
 
   const startTimer = () => {
     timer =
@@ -44,12 +44,12 @@ export const ExerciseModal = ({ handler, workout }) => {
             strokeWidth={19}
             showProgress={seconds}
             className="text-medium"
-            initialSeconds={currentWorkout.exercises[0].duration}
+            initialSeconds={currentExercise.duration}
           />
           <H1 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             {seconds} sec
           </H1>
-          <H2>{currentWorkout.exercises[0].exercise.name}</H2>
+          <H2>{currentExercise.exercise.name}</H2>
         </div>
         <button className="">
           <ArrowRight />

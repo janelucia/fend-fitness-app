@@ -14,7 +14,7 @@ import Circle from '../../Component/Circle';
 import Card from '../../Component/Card';
 import Button from '../../Component/Button';
 import { ID } from 'graphql-modules/shared/types';
-import ProgramModal from '../../Component/ProgramModal';
+import WorkoutModal from '../../Component/WorkoutModal';
 
 type ProgramProps = {
   program: {
@@ -190,7 +190,7 @@ const Program = () => {
           {!isOpen ? (
             <Button onClick={toggleModal}>jetzt starten</Button>
           ) : (
-            <ProgramModal
+            <WorkoutModal
               workout={progressWorkout}
               handler={toggleModal}
               isOpen={isOpen}
