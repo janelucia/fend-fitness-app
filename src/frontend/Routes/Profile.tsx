@@ -31,7 +31,7 @@ const Profile = () => {
                 strokeWidth={4}
                 showProgress={40}
                 initialSeconds={100}
-                className="text-medium"
+                strokeColor="#202430"
               />
               <ST className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                 40 %

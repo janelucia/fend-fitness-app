@@ -19,19 +19,30 @@ const WorkoutModal = ({
   workout,
 }) => {
   const [modal, setModal] = useState(ModalType.MainPanel);
+  const [exerciseIndex, setExerciseIndex] = useState(0);
+
+  const nextExercise = () => {
+    setExerciseIndex(exerciseIndex + 1);
+  };
+
+  const prevExercise = () => {
+    setExerciseIndex(exerciseIndex - 1);
+  };
 
   let renderModal = (modalType: ModalType) => {
     switch (modalType) {
       case ModalType.ExercisePanel:
-        return workout.exercises.map((exercise) => {
-          return (
-            <ExercisePanel
-              key={exercise.id}
-              handler={handler}
-              exercise={exercise}
-            />
-          );
-        });
+        return (
+          <ExercisePanel
+            key={exerciseIndex}
+            handler={handler}
+            exercise={workout.exercises[exerciseIndex]}
+            prevExercise={prevExercise}
+            nextExercise={nextExercise}
+            showNextButton={workout.exercises[exerciseIndex + 1] !== undefined}
+            showPrevButton={workout.exercises[exerciseIndex - 1] !== undefined}
+          />
+        );
       case ModalType.MainPanel:
         return (
           <MainPanel

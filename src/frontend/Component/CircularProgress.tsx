@@ -6,6 +6,7 @@ type CircularProps = {
   strokeWidth: number;
   showProgress?: number;
   initialSeconds?: number;
+  strokeColor?: string;
   className?: string;
 };
 
@@ -14,6 +15,7 @@ export const CircularProgress = ({
   strokeWidth,
   showProgress,
   initialSeconds,
+  strokeColor,
   className,
 }: CircularProps) => {
   const viewBox = `0 0 ${size} ${size}`;
@@ -36,9 +38,8 @@ export const CircularProgress = ({
         </linearGradient>
       </defs>
       <circle
-        className={classNames(className)}
         fill="none"
-        stroke="#3A4151"
+        stroke={strokeColor}
         cx={size / 2}
         cy={size / 2}
         r={radius}
