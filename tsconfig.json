@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "react-jsx",
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
     /* Projects */
@@ -100,7 +100,7 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
   "include": [
-    "./scr/**/*",
-    "src/custom.d.ts"
+    "./src/**/*",
+    "./custom.d.ts"
   ]
 }
