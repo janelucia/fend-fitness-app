@@ -8,14 +8,14 @@ html {
   background-color: #202430;
 }
 
-svg path {
+svg:not(.progressCircle) path {
   stroke: currentColor;
 }
 
-svg rect {
+svg:not(.progressCircle) rect {
   stroke: currentColor;
 }
 
-svg circle {
+svg:not(.progressCircle) circle {
   stroke: currentColor;
 }

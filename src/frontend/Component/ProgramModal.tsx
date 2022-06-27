@@ -1,5 +1,5 @@
 import { Dialog } from '@headlessui/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ReactComponent as ArrowBack } from '../styles/images/svg/arrowBack.svg';
 import Button from './Button';
 import H1 from './font/H1';

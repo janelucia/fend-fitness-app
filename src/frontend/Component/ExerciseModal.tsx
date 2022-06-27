@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ReactComponent as Close } from '../styles/images/svg/x.svg';
 import { ReactComponent as ArrowLeft } from '../styles/images/svg/arrowLeft.svg';
 import { ReactComponent as ArrowRight } from '../styles/images/svg/arrowRight.svg';
-import { ReactComponent as ProgressCircle } from '../styles/images/svg/progressCircle.svg';
+import { CircularProgress } from './CircularProgress';
 import H1 from './font/H1';
 import H2 from './font/H2';
 
@@ -39,7 +39,13 @@ export const ExerciseModal = ({ handler, workout }) => {
           <ArrowLeft />
         </button>
         <div className="flex flex-col gap-y-6 relative pt-10">
-          <ProgressCircle className="text-medium" />
+          <CircularProgress
+            size={234}
+            strokeWidth={19}
+            showProgress={seconds}
+            className="text-medium"
+            initialSeconds={currentWorkout.exercises[0].duration}
+          />
           <H1 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             {seconds} sec
           </H1>

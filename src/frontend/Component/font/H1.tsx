@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 type Props = {
   children: React.ReactNode;
-  className: string;
+  className?: string;
 };
 
 const H1: React.FunctionComponent<Props> = ({ children, className }) => {
