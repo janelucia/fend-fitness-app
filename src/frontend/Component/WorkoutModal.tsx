@@ -33,14 +33,21 @@ const WorkoutModal = ({
 }: WorkoutType) => {
   const [modal, setModal] = useState(ModalType.MainPanel);
   const [exerciseIndex, setExerciseIndex] = useState(0);
+  const [direction, setDirection] = useState<'up' | 'down'>('up');
 
   const nextExercise = () => {
-    setExerciseIndex(exerciseIndex + 1);
+    if ('up' === direction) {
+      setExerciseIndex(exerciseIndex + 1);
+    }
+    setDirection('up');
     setModal(ModalType.ExercisePanel);
   };
 
   const prevExercise = () => {
-    setExerciseIndex(exerciseIndex - 1);
+    if ('down' === direction) {
+      setExerciseIndex(exerciseIndex - 1);
+    }
+    setDirection('down');
     setModal(ModalType.ExercisePanel);
   };
 
@@ -52,8 +59,14 @@ const WorkoutModal = ({
             key={exerciseIndex}
             handler={handler}
             exercise={workout.exercises[exerciseIndex]}
-            prevExercise={() => setModal(ModalType.PausePanel)}
-            nextExercise={() => setModal(ModalType.PausePanel)}
+            prevExercise={() => {
+              setDirection('down');
+              setModal(ModalType.PausePanel);
+            }}
+            nextExercise={() => {
+              setDirection('up');
+              setModal(ModalType.PausePanel);
+            }}
             showNextButton={workout.exercises[exerciseIndex + 1] !== undefined}
             showPrevButton={workout.exercises[exerciseIndex - 1] !== undefined}
           />

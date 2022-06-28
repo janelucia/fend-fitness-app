@@ -69,6 +69,7 @@ const Program = () => {
                 id
                 exercise {
                   name
+                  description
                 }
                 duration
               }
@@ -76,6 +77,7 @@ const Program = () => {
                 id
                 exercise {
                   name
+                  description
                 }
                 reps
               }
@@ -188,7 +190,12 @@ const Program = () => {
         </section>
         <section className="fixed bottom-10 right-1/2 transform translate-x-1/2">
           {!isOpen ? (
-            <Button onClick={toggleModal}>jetzt starten</Button>
+            <Button
+              onClick={toggleModal}
+              className="bg-gradient-to-br from-gradient1A to-gradient1B"
+            >
+              jetzt starten
+            </Button>
           ) : (
             <WorkoutModal
               workout={progressWorkout}

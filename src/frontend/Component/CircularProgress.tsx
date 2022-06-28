@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 
 type CircularProps = {
   size: number;
@@ -7,7 +6,6 @@ type CircularProps = {
   showProgress?: number;
   initialSeconds?: number;
   strokeColor?: string;
-  className?: string;
 };
 
 export const CircularProgress = ({
@@ -16,7 +14,6 @@ export const CircularProgress = ({
   showProgress,
   initialSeconds,
   strokeColor,
-  className,
 }: CircularProps) => {
   const viewBox = `0 0 ${size} ${size}`;
   const radius = (size - strokeWidth) / 2;

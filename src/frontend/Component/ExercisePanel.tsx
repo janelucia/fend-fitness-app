@@ -1,4 +1,3 @@
-import { Dialog } from '@headlessui/react';
 import { useEffect, useState } from 'react';
 import { ReactComponent as ArrowLeft } from '../styles/images/svg/arrowLeft.svg';
 import { ReactComponent as ArrowRight } from '../styles/images/svg/arrowRight.svg';
@@ -69,7 +68,12 @@ export const ExercisePanel = ({
     );
 
   return (
-    <PanelWrapper handler={handler}>
+    <PanelWrapper
+      handler={handler}
+      showInfo={true}
+      exerciseTitle={currentExercise.exercise.name}
+      exerciseDescription={currentExercise.exercise.description}
+    >
       <button
         onClick={prevExercise}
         disabled={!showPrevButton}
@@ -80,7 +84,9 @@ export const ExercisePanel = ({
       <div className="flex flex-col gap-y-6 relative pt-10 items-center">
         {trackExercise()}
         {!showNextButton ? (
-          <Button className="text-dark">geschafft</Button>
+          <Button className="text-dark bg-gradient-to-br from-gradient1A to-gradient1B">
+            geschafft
+          </Button>
         ) : (
           <></>
         )}

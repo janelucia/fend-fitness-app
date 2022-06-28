@@ -34,7 +34,7 @@ export const MainPanel = ({
     </div>
     <Button
       onClick={setExercisePanel}
-      className="absolute bottom-10 text-dark px-3"
+      className="absolute bottom-10 text-dark px-3 bg-gradient-to-br from-gradient1A to-gradient1B"
     >
       los!
     </Button>

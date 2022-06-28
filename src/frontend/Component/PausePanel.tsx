@@ -7,6 +7,7 @@ import { CircularProgress } from './CircularProgress';
 import H1 from './font/H1';
 import H2 from './font/H2';
 import PanelWrapper from './PanelWrapper';
+import Button from './Button';
 
 type PauseType = {
   handler: any;
@@ -39,7 +40,7 @@ export const PausePanel = ({
   }, [seconds]);
 
   return (
-    <PanelWrapper handler={handler}>
+    <PanelWrapper handler={handler} showInfo={false}>
       <button onClick={prevExercise}>
         <ArrowLeft />
       </button>
@@ -55,6 +56,9 @@ export const PausePanel = ({
           {seconds} sec
         </H1>
         <H2>Pause</H2>
+        <Button onClick={nextExercise} className="text-light bg-medium">
+          überspringen
+        </Button>
       </div>
       <button onClick={nextExercise}>
         <ArrowRight />
