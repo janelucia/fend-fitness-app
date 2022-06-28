@@ -81,7 +81,11 @@ export const ExercisePanel = ({
       >
         <ArrowLeft />
       </button>
-      <div className="flex flex-col gap-y-6 relative pt-10 items-center">
+      <div
+        className={`${
+          !showNextButton ? 'pt-24' : 'pt-10'
+        } flex flex-col gap-y-6 relative items-center`}
+      >
         {trackExercise()}
         {!showNextButton ? (
           <Button className="text-dark bg-gradient-to-br from-gradient1A to-gradient1B">

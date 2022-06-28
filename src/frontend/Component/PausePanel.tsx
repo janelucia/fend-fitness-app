@@ -44,18 +44,20 @@ export const PausePanel = ({
       <button onClick={prevExercise}>
         <ArrowLeft />
       </button>
-      <div className="flex flex-col gap-y-6 relative pt-10 items-center">
-        <CircularProgress
-          size={234}
-          strokeWidth={19}
-          showProgress={seconds}
-          initialSeconds={15}
-          strokeColor="#3A4151"
-        />
-        <H1 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          {seconds} sec
-        </H1>
-        <H2>Pause</H2>
+      <div className="flex flex-col gap-y-12 relative pt-32 items-center">
+        <div className="flex flex-col gap-y-6">
+          <CircularProgress
+            size={234}
+            strokeWidth={19}
+            showProgress={seconds}
+            initialSeconds={15}
+            strokeColor="#3A4151"
+          />
+          <H1 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            {seconds} sec
+          </H1>
+          <H2>Pause</H2>
+        </div>
         <Button onClick={nextExercise} className="text-light bg-medium">
           überspringen
         </Button>
