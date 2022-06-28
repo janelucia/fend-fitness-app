@@ -5,6 +5,15 @@ import H1 from './font/H1';
 import H3 from './font/H3';
 import ST from './font/SmallText';
 
+type MainType = {
+  title: string;
+  handler: any;
+  week: any;
+  subtitle: string;
+  information: string;
+  setExercisePanel: any;
+};
+
 export const MainPanel = ({
   title,
   handler,
@@ -12,7 +21,7 @@ export const MainPanel = ({
   subtitle,
   information,
   setExercisePanel,
-}) => (
+}: MainType) => (
   <Dialog.Panel className="text-light text-center relative flex flex-col items-center justify-center h-full">
     <Dialog.Title className="absolute top-1 mx-auto">{title}</Dialog.Title>
     <button onClick={handler} className="absolute top-3 right-3">

@@ -2,10 +2,23 @@ import { Dialog } from '@headlessui/react';
 import { useState } from 'react';
 import { ExercisePanel } from './ExercisePanel';
 import { MainPanel } from './MainPanel';
+import { PausePanel } from './PausePanel';
+
+type WorkoutType = {
+  handler: any;
+  isOpen: any;
+  setIsOpen: any;
+  title: string;
+  week: any;
+  subtitle: string;
+  information: string;
+  workout: any;
+};
 
 enum ModalType {
   MainPanel,
   ExercisePanel,
+  PausePanel,
 }
 
 const WorkoutModal = ({
@@ -17,16 +30,18 @@ const WorkoutModal = ({
   subtitle,
   information,
   workout,
-}) => {
+}: WorkoutType) => {
   const [modal, setModal] = useState(ModalType.MainPanel);
   const [exerciseIndex, setExerciseIndex] = useState(0);
 
   const nextExercise = () => {
     setExerciseIndex(exerciseIndex + 1);
+    setModal(ModalType.ExercisePanel);
   };
 
   const prevExercise = () => {
     setExerciseIndex(exerciseIndex - 1);
+    setModal(ModalType.ExercisePanel);
   };
 
   let renderModal = (modalType: ModalType) => {
@@ -37,10 +52,18 @@ const WorkoutModal = ({
             key={exerciseIndex}
             handler={handler}
             exercise={workout.exercises[exerciseIndex]}
-            prevExercise={prevExercise}
-            nextExercise={nextExercise}
+            prevExercise={() => setModal(ModalType.PausePanel)}
+            nextExercise={() => setModal(ModalType.PausePanel)}
             showNextButton={workout.exercises[exerciseIndex + 1] !== undefined}
             showPrevButton={workout.exercises[exerciseIndex - 1] !== undefined}
+          />
+        );
+      case ModalType.PausePanel:
+        return (
+          <PausePanel
+            handler={handler}
+            prevExercise={prevExercise}
+            nextExercise={nextExercise}
           />
         );
       case ModalType.MainPanel:
