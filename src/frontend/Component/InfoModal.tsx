@@ -39,8 +39,8 @@ const InfoModal = ({ exerciseTitle, exerciseDescription }: InfoType) => {
     return (
       <section
         className={`${
-          !showModal ? 'hidden' : ''
-        } bg-medium flex flex-col items-start justify-start text-left gap-y-20 p-2 transition`}
+          !showModal ? '' : ''
+        } bg-medium h-max absolute flex flex-col items-start justify-start text-left gap-y-20 p-2 transform translate-y-full duration-300`}
       >
         <div>
           <H1 className="pb-5">{exerciseTitle}</H1>
@@ -61,7 +61,7 @@ const InfoModal = ({ exerciseTitle, exerciseDescription }: InfoType) => {
   return (
     <section
       className={`${
-        !showModal ? 'fixed h-10 bg-opacity-70' : 'absolute'
+        !showModal ? 'fixed bg-opacity-70' : 'absolute'
       } w-full rounded-tl-3xl rounded-tr-3xl flex justify-around gap-x-12 bottom-0 bg-medium px-5 py-2 text-opacity-100`}
     >
       {!showModal ? <InfoIcon /> : <InfoSection />}

@@ -15,7 +15,7 @@ const Button = ({ children, onClick, className }: Button) => {
     <button
       onClick={onClick}
       className={classNames(
-        'flex justify-center w-fit px-3 py-1 rounded-[50px]',
+        'flex justify-center w-fit px-4 py-2 rounded-[50px]',
         className
       )}
     >
