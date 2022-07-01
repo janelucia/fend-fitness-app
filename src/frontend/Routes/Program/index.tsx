@@ -1,11 +1,12 @@
 import React, { ReactNode, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { gql, useQuery } from '@apollo/client';
-import { Menu, Transition } from '@headlessui/react';
+import { useQuery } from '@apollo/client';
+import { Menu } from '@headlessui/react';
 import gradientArray from '../../styles/gradientArray';
 import { ReactComponent as Close } from '../../styles/images/svg/x.svg';
 import { ReactComponent as ExpandLess } from '../../styles/images/svg/expandLess.svg';
 import { ReactComponent as ExpandMore } from '../../styles/images/svg/expandMore.svg';
+import { PROGRAM_QUERY } from '../../Queries/Programs';
 import H1 from '../../Component/font/H1';
 import H3 from '../../Component/font/H3';
 import P from '../../Component/font/P';
@@ -45,48 +46,6 @@ type WorkoutProps = {
 
 const Program = () => {
   const { id } = useParams();
-  const PROGRAM_QUERY = gql`
-    query GetProgram($id: ID!) {
-      program(where: { id: $id }) {
-        description
-        difficulty
-        focus
-        id
-        image {
-          url
-        }
-        name
-        weeks {
-          id
-          title
-          workouts {
-            id
-            name
-            duration
-            category
-            exercises {
-              ... on ExerciseWithDuration {
-                id
-                exercise {
-                  name
-                  description
-                }
-                duration
-              }
-              ... on ExerciseWithReps {
-                id
-                exercise {
-                  name
-                  description
-                }
-                reps
-              }
-            }
-          }
-        }
-      }
-    }
-  `;
 
   let [isOpen, setIsOpen] = useState(false);
   const toggleModal = () => {
@@ -98,13 +57,15 @@ const Program = () => {
   });
   if (loading) return <p className="text-light text-center">loading ...</p>;
   if (error) return <p className="text-light text-center">error :/ </p>;
+
+  const program = data.appUser.programs[0];
+  const progressWorkout = program.weeks[0].workouts[0];
+
   const backgroundImage = {
-    backgroundImage: `url(${data.program.image.url})`,
+    backgroundImage: `url(${program.image.url})`,
     height: '70vh',
     backgroundSize: 'cover',
   };
-
-  const progressWorkout = data.program.weeks[0].workouts[0];
 
   const extractWorkouts = (week: WeekProps): ReactNode =>
     week.workouts.map((workout) => (
@@ -112,7 +73,7 @@ const Program = () => {
         <P>{workout.name}</P>·<ST>{workout.duration} min</ST>
       </li>
     ));
-  const weekOverview = data.program.weeks
+  const weekOverview = program.weeks
     .map((week, i) => ({
       ...week,
       gradient: gradientArray[i % gradientArray.length],
@@ -158,33 +119,33 @@ const Program = () => {
           <Link type="button" to="/browse" className="absolute top-6 right-6">
             <Close />
           </Link>
-          <H1>{data.program.name}</H1>
+          <H1>{program.name}</H1>
           <div className="flex justify-around w-full items-end pb-5 h-1/2">
             <div className="flex flex-col items-center gap-y-2">
               <Circle className="w-8 h-8 bg-gradient-to-br from-gradient1A to-gradient1B" />
-              <ST>{data.program.focus}</ST>
+              <ST>{program.focus}</ST>
             </div>
             <div className="flex flex-col items-center gap-y-2">
               <Circle className="w-8 h-8 bg-gradient-to-br from-gradient2A to-gradient2B" />
-              <ST>{data.program.difficulty}</ST>
+              <ST>{program.difficulty}</ST>
             </div>
             <div className="flex flex-col items-center gap-y-2">
               <Circle className="w-8 h-8 bg-gradient-to-br from-gradient3A via-gradient3B to-gradient3C" />
-              <ST>{data.program.duration} weeks</ST>
+              <ST>{program.weeks.length} weeks</ST>
             </div>
           </div>
         </section>
       </header>
       <main className="relative overflow-auto">
         <section className="px-5 py-5 bg-medium">
-          <P>{data.program.description}</P>
+          <P>{program.description}</P>
         </section>
         <section className="px-5 py-5">
           <H3>So ist das Programm aufgeteilt:</H3>
         </section>
         <section className="px-5 py-5">
           <div className="flex justify-between items-center">
-            <H3>{data.program.weeks.length} Weeks</H3>
+            <H3>{program.weeks.length} Weeks</H3>
           </div>
           <ul className="flex flex-col gap-y-2">{weekOverview}</ul>
         </section>
@@ -204,9 +165,9 @@ const Program = () => {
               setIsOpen={() => {
                 setIsOpen(false);
               }}
-              title={data.program?.name}
+              title={program?.name}
               subtitle={progressWorkout.name}
-              week={data.program.weeks[0].title}
+              week={program.weeks[0].title}
               information={`${progressWorkout.duration} Minutes · ${progressWorkout.category}`}
             />
           )}

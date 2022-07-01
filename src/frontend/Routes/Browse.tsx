@@ -3,7 +3,7 @@ import Navi from '../Component/Navi';
 import H2 from '../Component/font/H2';
 import Card from '../Component/Card';
 import gradientArray from '../styles/gradientArray';
-import PROGRAMS_QUERY from '../Queries/Programs';
+import { PROGRAMS_QUERY } from '../Queries/Programs';
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 
@@ -18,7 +18,7 @@ const ProgramQuery = () => {
   if (loading) return <p className="text-light text-center">loading ...</p>;
   if (error) return <p className="text-light text-center">error :/ </p>;
 
-  return data.programs
+  return data.appUser.programs
     .map((program: Programs, i: number) => ({
       ...program,
       gradient: gradientArray[i % gradientArray.length],
