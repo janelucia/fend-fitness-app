@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { Menu } from '@headlessui/react';
 import gradientArray from '../../styles/gradientArray';
 import { ReactComponent as Close } from '../../styles/images/svg/x.svg';
@@ -19,7 +19,7 @@ import WorkoutModal from '../../Component/WorkoutModal';
 
 type ProgramProps = {
   program: {
-    id: ID;
+    programid: ID;
     description: string;
     difficulty: string;
     focus: string;
@@ -34,6 +34,7 @@ type ProgramProps = {
 type WeekProps = {
   id: ID;
   title: string;
+  gradient?: string;
   workouts: WorkoutProps[];
 };
 
@@ -53,7 +54,7 @@ const Program = () => {
   };
 
   const { loading, error, data } = useQuery(PROGRAM_QUERY, {
-    variables: { id },
+    variables: { programid: id },
   });
   if (loading) return <p className="text-light text-center">loading ...</p>;
   if (error) return <p className="text-light text-center">error :/ </p>;
@@ -74,11 +75,11 @@ const Program = () => {
       </li>
     ));
   const weekOverview = program.weeks
-    .map((week, i) => ({
+    .map((week: WeekProps, i: number) => ({
       ...week,
       gradient: gradientArray[i % gradientArray.length],
     }))
-    .map((week) => {
+    .map((week: WeekProps) => {
       return (
         <li key={week.id}>
           <Card className="flex gap-x-3">
@@ -109,6 +110,7 @@ const Program = () => {
         </li>
       );
     });
+
   return (
     <>
       <header>
@@ -159,6 +161,8 @@ const Program = () => {
             </Button>
           ) : (
             <WorkoutModal
+              programId={id}
+              weekId={program.weeks[0].id}
               workout={progressWorkout}
               handler={toggleModal}
               isOpen={isOpen}

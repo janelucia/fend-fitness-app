@@ -1,5 +1,8 @@
+import { useMutation } from '@apollo/client';
 import { Dialog } from '@headlessui/react';
+import { ID } from 'graphql-modules/shared/types';
 import { useState } from 'react';
+import { CREATE_PROGRESS } from '../Mutations/CreateProgress';
 import { ExercisePanel } from './ExercisePanel';
 import { MainPanel } from './MainPanel';
 import { PausePanel } from './PausePanel';
@@ -8,8 +11,10 @@ type WorkoutType = {
   handler: any;
   isOpen: any;
   setIsOpen: any;
+  programId: ID;
   title: string;
   week: any;
+  weekId: ID;
   subtitle: string;
   information: string;
   workout: any;
@@ -25,8 +30,10 @@ const WorkoutModal = ({
   handler,
   isOpen,
   setIsOpen,
+  programId,
   title,
   week,
+  weekId,
   subtitle,
   information,
   workout,
@@ -34,6 +41,8 @@ const WorkoutModal = ({
   const [modal, setModal] = useState(ModalType.MainPanel);
   const [exerciseIndex, setExerciseIndex] = useState(0);
   const [direction, setDirection] = useState<'up' | 'down'>('up');
+  const [createProgress, { data, loading, error }] =
+    useMutation(CREATE_PROGRESS);
 
   const nextExercise = () => {
     if ('up' === direction) {
@@ -87,7 +96,16 @@ const WorkoutModal = ({
             week={week}
             subtitle={subtitle}
             information={information}
-            setExercisePanel={() => setModal(ModalType.ExercisePanel)}
+            setExercisePanel={() => {
+              setModal(ModalType.ExercisePanel);
+              createProgress({
+                variables: {
+                  programid: programId,
+                  weekid: weekId,
+                  workoutid: workout.id,
+                },
+              });
+            }}
           />
         );
     }

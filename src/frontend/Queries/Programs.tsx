@@ -13,11 +13,11 @@ export const PROGRAMS_QUERY = gql`
 `;
 
 export const PROGRAM_QUERY = gql`
-  query ProgramQuery($id: ID!) {
+  query ProgramQuery($programid: ID!) {
     appUser(where: { id: "cl4pdljpsvttf0bul89nqxrua" }) {
       id
       name
-      programs(where: { id: $id }) {
+      programs(where: { id: $programid }) {
         description
         difficulty
         focus
