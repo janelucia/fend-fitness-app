@@ -34,7 +34,7 @@ export const CREATE_PROGRESS = gql`
 `;
 
 export const PUBLISH_PROGRESS = gql`
-  mutation PublishProgress {
+  mutation PublishProgress($progressid: ID!) {
     publishProgress(where: { id: $progressid }) {
       id
     }

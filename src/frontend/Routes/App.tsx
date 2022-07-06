@@ -23,12 +23,14 @@ function App() {
       return (
         <Link to={`browse/program/${user.progresses[0].program.id}`}>
           <Card
-            className="h-52 p-5 flex flex-col justify-end"
+            className="h-52 p-5 flex flex-col justify-end relative"
             url={user.progresses[0].program.image.url}
           >
-            <H3>{user.progresses[0].week.title}</H3>
-            <H2>{user.progresses[0].program.name}</H2>
-            <ST>{`${user.progresses[0].workout.duration} Min. · ${user.progresses[0].workout.category}`}</ST>
+            <div className="w-full bg-medium bg-opacity-75 absolute left-0 bottom-0 rounded-b-[30px] px-5 py-2">
+              <H3>{user.progresses[0].week.title}</H3>
+              <H2>{user.progresses[0].program.name}</H2>
+              <ST>{`${user.progresses[0].workout.duration} Min. · ${user.progresses[0].workout.category}`}</ST>
+            </div>
           </Card>
         </Link>
       );

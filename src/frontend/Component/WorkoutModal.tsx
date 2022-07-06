@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client';
 import { Dialog } from '@headlessui/react';
 import { ID } from 'graphql-modules/shared/types';
 import { useState } from 'react';
-import { CREATE_PROGRESS } from '../Mutations/CreateProgress';
+import { CREATE_PROGRESS, PUBLISH_PROGRESS } from '../Mutations/CreateProgress';
 import { ExercisePanel } from './ExercisePanel';
 import { MainPanel } from './MainPanel';
 import { PausePanel } from './PausePanel';
@@ -43,6 +43,8 @@ const WorkoutModal = ({
   const [direction, setDirection] = useState<'up' | 'down'>('up');
   const [createProgress, { data, loading, error }] =
     useMutation(CREATE_PROGRESS);
+
+  const [publishProgress] = useMutation(PUBLISH_PROGRESS);
 
   const nextExercise = () => {
     if ('up' === direction) {
@@ -98,16 +100,21 @@ const WorkoutModal = ({
             information={information}
             setExercisePanel={() => {
               setModal(ModalType.ExercisePanel);
-              const currentProgress = createProgress({
+              createProgress({
                 variables: {
                   programid: programId,
                   weekid: weekId,
                   workoutid: workout.id,
                 },
-              });
-              console.log(currentProgress);
-              const {} = currentProgress;
-              console.log(data);
+              })
+                .then((res) => {
+                  return publishProgress({
+                    variables: { progressid: res.data.createProgress.id },
+                  });
+                })
+                .catch((error) =>
+                  console.error('createProgress failed', error)
+                );
             }}
           />
         );
