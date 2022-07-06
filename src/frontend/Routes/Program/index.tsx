@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useMutation, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { Menu } from '@headlessui/react';
 import gradientArray from '../../styles/gradientArray';
 import { ReactComponent as Close } from '../../styles/images/svg/x.svg';

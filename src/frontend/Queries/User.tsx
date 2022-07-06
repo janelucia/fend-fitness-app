@@ -9,6 +9,25 @@ const USER_QUERY = gql`
       image {
         url
       }
+      progresses(orderBy: publishedAt_DESC) {
+        id
+        createdAt
+        program {
+          id
+          name
+          image {
+            url
+          }
+        }
+        workout {
+          name
+          category
+          duration
+        }
+        week {
+          title
+        }
+      }
     }
   }
 `;

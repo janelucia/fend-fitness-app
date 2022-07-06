@@ -1,4 +1,4 @@
-import { gql, useMutation } from '@apollo/client';
+import { gql } from '@apollo/client';
 
 export const CREATE_PROGRESS = gql`
   mutation CreateProgressMutation(
@@ -29,6 +29,14 @@ export const CREATE_PROGRESS = gql`
         id
       }
       finished
+    }
+  }
+`;
+
+export const PUBLISH_PROGRESS = gql`
+  mutation PublishProgress {
+    publishProgress(where: { id: $progressid }) {
+      id
     }
   }
 `;

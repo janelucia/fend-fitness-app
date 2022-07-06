@@ -98,13 +98,16 @@ const WorkoutModal = ({
             information={information}
             setExercisePanel={() => {
               setModal(ModalType.ExercisePanel);
-              createProgress({
+              const currentProgress = createProgress({
                 variables: {
                   programid: programId,
                   weekid: weekId,
                   workoutid: workout.id,
                 },
               });
+              console.log(currentProgress);
+              const {} = currentProgress;
+              console.log(data);
             }}
           />
         );

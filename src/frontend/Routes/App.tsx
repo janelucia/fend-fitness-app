@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { gql, useQuery } from '@apollo/client';
 import Card from '../Component/Card';
 import H1 from '../Component/font/H1';
 import H2 from '../Component/font/H2';
@@ -8,9 +7,33 @@ import ST from '../Component/font/SmallText';
 import HeroImage from '../styles/images/HeroImage.png';
 import Navi from '../Component/Navi';
 import User from '../Queries/User';
+import { Link } from 'react-router-dom';
 
 function App() {
   const user = User();
+
+  const ProgramCard = () => {
+    if (!user.progresses || user.progresses.length === 0) {
+      return (
+        <Card className="h-52 p-5 flex flex-col justify-end">
+          <H2>Starte jetzt mit deinem Workout!</H2>
+        </Card>
+      );
+    } else {
+      return (
+        <Link to={`browse/program/${user.progresses[0].program.id}`}>
+          <Card
+            className="h-52 p-5 flex flex-col justify-end"
+            url={user.progresses[0].program.image.url}
+          >
+            <H3>{user.progresses[0].week.title}</H3>
+            <H2>{user.progresses[0].program.name}</H2>
+            <ST>{`${user.progresses[0].workout.duration} Min. · ${user.progresses[0].workout.category}`}</ST>
+          </Card>
+        </Link>
+      );
+    }
+  };
   return (
     <>
       <header className="mt-10 mx-5 mb-6">
@@ -22,11 +45,7 @@ function App() {
           <H2 className="inline">Dein Workout heute</H2>
           <ST className="inline relative left-12">Trainingsplan</ST>
         </div>
-        <Card className="h-52 p-5 flex flex-col justify-end">
-          <H3>Tag 2</H3>
-          <H2>Titel des Programms</H2>
-          <ST>26 Min. · Beweglichkeit</ST>
-        </Card>
+        <ProgramCard />
       </main>
       <footer>
         <Navi />
