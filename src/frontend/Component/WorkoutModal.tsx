@@ -1,8 +1,9 @@
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { Dialog } from '@headlessui/react';
 import { ID } from 'graphql-modules/shared/types';
 import { useState } from 'react';
-import { CREATE_PROGRESS, PUBLISH_PROGRESS } from '../Mutations/CreateProgress';
+import { PUBLISH_PROGRESS, UPSERT_PROGRESS } from '../Mutations/UpsertProgress';
+import { PROGRESS_QUERY } from '../Queries/Progress';
 import { ExercisePanel } from './ExercisePanel';
 import { MainPanel } from './MainPanel';
 import { PausePanel } from './PausePanel';
@@ -41,10 +42,11 @@ const WorkoutModal = ({
   const [modal, setModal] = useState(ModalType.MainPanel);
   const [exerciseIndex, setExerciseIndex] = useState(0);
   const [direction, setDirection] = useState<'up' | 'down'>('up');
-  const [createProgress, { data, loading, error }] =
-    useMutation(CREATE_PROGRESS);
-
+  const [upsertProgress] = useMutation(UPSERT_PROGRESS);
   const [publishProgress] = useMutation(PUBLISH_PROGRESS);
+  const { loading, error, data } = useQuery(PROGRESS_QUERY, {
+    variables: { programid: programId },
+  });
 
   const nextExercise = () => {
     if ('up' === direction) {
@@ -100,8 +102,9 @@ const WorkoutModal = ({
             information={information}
             setExercisePanel={() => {
               setModal(ModalType.ExercisePanel);
-              createProgress({
+              upsertProgress({
                 variables: {
+                  progressid: data.progresses[0].id,
                   programid: programId,
                   weekid: weekId,
                   workoutid: workout.id,
@@ -109,11 +112,13 @@ const WorkoutModal = ({
               })
                 .then((res) => {
                   return publishProgress({
-                    variables: { progressid: res.data.createProgress.id },
+                    variables: {
+                      progressid: res.data.upsertProgress.id,
+                    },
                   });
                 })
                 .catch((error) =>
-                  console.error('createProgress failed', error)
+                  console.error('upsertProgress failed', error)
                 );
             }}
           />
