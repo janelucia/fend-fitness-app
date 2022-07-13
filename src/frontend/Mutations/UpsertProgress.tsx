@@ -5,6 +5,7 @@ export const UPSERT_PROGRESS = gql`
     $programid: ID!
     $weekid: ID!
     $workoutid: ID!
+    $nextworkoutid: ID!
     $progressid: ID!
   ) {
     upsertProgress(
@@ -22,7 +23,7 @@ export const UPSERT_PROGRESS = gql`
           }
           program: { update: { where: { id: $programid }, data: {} } }
           week: { update: { where: { id: $weekid }, data: {} } }
-          workout: { update: { where: { id: $workoutid }, data: {} } }
+          workout: { connect: { where: { id: $nextworkoutid }} }
           finished: false
         }
       }

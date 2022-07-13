@@ -108,6 +108,7 @@ const WorkoutModal = ({
                   programid: programId,
                   weekid: weekId,
                   workoutid: workout.id,
+                  nextworkoutid: workout.id, // TODO
                 },
               })
                 .then((res) => {
